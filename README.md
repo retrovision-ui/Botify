@@ -1,2 +1,0 @@
-# Botify
-Botify | API Marketplace
