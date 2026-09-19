@@ -1,3 +1,19 @@
+<p align="center">
+  <img src="https://github.com/retrovision-ui/Botify/blob/main/assets/005.png" alt="Geminy Banner" width="300"/>
+</p>
+
+<h1 align="center"></h1>
+<p align="center"><i>Özgür Marketin.</i></p>
+
+<p align="center">
+  <a href="https://botify.unaux.com">
+    <img src="https://img.shields.io/badge/WEB_ADRES-İncele-ff2d72?style=for-the-badge&logo=heart&logoColor=white" alt="Demo"/>
+  </a>
+  <img src="https://img.shields.io/badge/VERSION-V8.0-7c3aed?style=for-the-badge&logo=sparkles&logoColor=white"/>
+  <img src="https://img.shields.io/badge/STATUS-PRODUCTION_READY-22c55e?style=for-the-badge"/>
+</p>
+
+
 # BOTIFY V4 — mega güncelleme
 
 ## ⚠️ Önce bunu oku — altyapı düzeltmesi
@@ -7,13 +23,6 @@ Canlı veritabanını incelerken tüm tabloların **MyISAM** motoruyla oluştuğ
 
 `new.4.sql` dosyasının en başında tüm tabloları **InnoDB**'ye çeviren `ALTER TABLE ... ENGINE=InnoDB` satırları var — bunları çalıştırmak veriyi silmez, sadece motoru düzeltir. Yeni kurulumlarda `v3_database.sql` zaten `ENGINE=InnoDB` ile geliyor.
 
-## ⚠️ Ayrıca: bir API anahtarı sızıntısı buldum
-Test verinde `SMS Api` ilanına yüklenen kaynak dosyasının içine gerçek bir RapidAPI anahtarı düz metin olarak yapıştırılmış, ve bu dosyayı satın alan kullanıcı zaten indirip yorum bırakmış ("Kaynak kod için thanks"). Yani o anahtar bir başka kullanıcıya görünmüş durumda — **o RapidAPI anahtarını hemen iptal edip yenisini almanı öneririm.**
-Bunu tekrar yaşamamak için Studio'daki dosya yükleme artık: dosyada anahtar/token benzeri bir şey bulursa hem istemci hem sunucu tarafında **kaynak koddan otomatik siliyor** ve "Gizli Başlıklar" kutusuna taşıyor — indirilebilir kaynak kodda artık düz metin anahtar kalmıyor.
-
-## v4-mega'da yeni olanlar
-- **Giriş/Kaydol/Şifremi Unuttum:** attığın geminy.me görseline ve `login_screen_update/` referanslarına göre yeniden tasarlandı — animasyonlu blob arkaplan, blur cam kart, ikonlu pill input'lar, "Beni Hatırla" ile çerezli sessiz giriş.
-- **Alt menü (footer):** `login_screen_update/footer-liquid.css`'ten ilham alarak her sekme kendi "liquid glass" kutucuğu oldu, aktif sekme mor-pembe parıltıyla öne çıkıyor.
 - **🔐 Önemli düzeltme:** Stripe gizli anahtarı ve IBAN için **hash değil, geri döndürülebilir şifreleme (AES-256)** kullanıyorum — hash tek yönlüdür, sistemin ödeme alabilmesi için anahtarı tekrar okuyabilmesi lazım. Hash sadece şifre ve "beni hatırla" tokenı gibi yalnızca *doğrulanması* gereken yerlerde kullanılıyor.
 - **Ayarlar artık Telegram tarzı bir menü:** Profil sayfası artık bir hub — Kişisel Bilgiler / Mesajlar / Bildirimler / Ödemeler / Çekim Talebi / Hakkımızda, her biri kendi sayfasında (`settings-account.php`, `settings-notifications.php`, `settings-payments.php`, `about.php`).
 - **Hakkımızda:** "Powered by Claude (Anthropic) 🌲" — söz verdiğim gibi.
@@ -24,15 +33,3 @@ Bunu tekrar yaşamamak için Studio'daki dosya yükleme artık: dosyada anahtar/
 - **chat.php "bulunamadı" hatası hakkında:** kodda bir hata bulamadım; veritabanı incelemesinde `messages` tablosunun zaten var olduğunu gördüm, yani muhtemelen geçiciydi ya da önbellek kaynaklıydı. Yine de sorun devam ederse hangi adımda/hangi tarayıcıda olduğunu söyle, birlikte bakalım.
 
 ## Kurulum
-1. **Önce** `new.4.sql`'in en üstündeki `ENGINE=InnoDB` satırlarını çalıştır (bu dosyanın kendisi zaten bunları en başta içeriyor, sırasıyla çalıştırman yeterli).
-2. Yeni kurulum: `v3_database.sql` içeri aktar.
-3. Var olan kuruluma yükseltme: `new.sql` → `v3-mega.sql` → `new.4.sql` sırasıyla.
-4. `app/config.example.php` → `app/config.php`; DB bilgilerini gir, **`ENCRYPTION_KEY`'i rastgele/uzun bir değerle doldur** (Stripe anahtarı ve IBAN bunsuz şifrelenemez), istersen `STRIPE_SECRET_KEY` ekle.
-5. Sırları asla commit etme.
-
-## Klasör Yapısı
-- `public/` — sayfalar (index, login, register, forgot, reset, dashboard, studio, my-apis, api, purchases, profile, settings-account, settings-notifications, settings-payments, about, console, messages, chat, dataset, payouts, checkout-return)
-- `api/v1/` — JSON uç noktaları
-- `api/middleware/` — oturum/anahtar doğrulama, rate-limit
-- `assets/CSS/style.css` — tüm paylaşılan bileşenler (tek kaynak)
-- `app/functions.php` — `encrypt_secret()`/`decrypt_secret()` (AES-256, ENCRYPTION_KEY ile)
