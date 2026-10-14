@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/retrovision-ui/Botify/blob/main/assets/005.png" alt="Geminy Banner" width="300"/>
+  <img src="https://github.com/retrovision-ui/Botify/blob/main/assets/luve1.png" alt="Geminy Banner" width="300"/>
 </p>
 
 <h1 align="center"></h1>
